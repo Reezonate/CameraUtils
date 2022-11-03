@@ -15,26 +15,26 @@ namespace CameraUtils.Core {
         private static readonly int DesktopMask_AND = Everything;
 
         static CullingMaskUtils() {
-            MirrorMask_OR |= 1 << (int)VisibilityLayer.AlwaysVisible;
-            MirrorMask_OR |= 1 << (int)VisibilityLayer.DesktopOnly;
-            MirrorMask_OR |= 1 << (int)VisibilityLayer.HmdOnly;
-            MirrorMask_AND &= ~(1 << (int)VisibilityLayer.AlwaysVisibleNoMirror);
-            MirrorMask_AND &= ~(1 << (int)VisibilityLayer.DesktopOnlyNoMirror);
-            MirrorMask_AND &= ~(1 << (int)VisibilityLayer.HmdOnlyNoMirror);
+            MirrorMask_OR |= 1 << (int)VisibilityLayer.AlwaysVisibleAndReflected;
+            MirrorMask_OR |= 1 << (int)VisibilityLayer.DesktopOnlyAndReflected;
+            MirrorMask_OR |= 1 << (int)VisibilityLayer.HmdOnlyAndReflected;
+            MirrorMask_AND &= ~(1 << (int)VisibilityLayer.AlwaysVisible);
+            MirrorMask_AND &= ~(1 << (int)VisibilityLayer.DesktopOnly);
+            MirrorMask_AND &= ~(1 << (int)VisibilityLayer.HmdOnly);
 
             HMDMask_OR |= 1 << (int)VisibilityLayer.AlwaysVisible;
-            HMDMask_OR |= 1 << (int)VisibilityLayer.AlwaysVisibleNoMirror;
+            HMDMask_OR |= 1 << (int)VisibilityLayer.AlwaysVisibleAndReflected;
             HMDMask_OR |= 1 << (int)VisibilityLayer.HmdOnly;
-            HMDMask_OR |= 1 << (int)VisibilityLayer.HmdOnlyNoMirror;
+            HMDMask_OR |= 1 << (int)VisibilityLayer.HmdOnlyAndReflected;
             HMDMask_AND &= ~(1 << (int)VisibilityLayer.DesktopOnly);
-            HMDMask_AND &= ~(1 << (int)VisibilityLayer.DesktopOnlyNoMirror);
+            HMDMask_AND &= ~(1 << (int)VisibilityLayer.DesktopOnlyAndReflected);
 
             DesktopMask_OR |= 1 << (int)VisibilityLayer.AlwaysVisible;
-            DesktopMask_OR |= 1 << (int)VisibilityLayer.AlwaysVisibleNoMirror;
+            DesktopMask_OR |= 1 << (int)VisibilityLayer.AlwaysVisibleAndReflected;
             DesktopMask_OR |= 1 << (int)VisibilityLayer.DesktopOnly;
-            DesktopMask_OR |= 1 << (int)VisibilityLayer.DesktopOnlyNoMirror;
+            DesktopMask_OR |= 1 << (int)VisibilityLayer.DesktopOnlyAndReflected;
             DesktopMask_AND &= ~(1 << (int)VisibilityLayer.HmdOnly);
-            DesktopMask_AND &= ~(1 << (int)VisibilityLayer.HmdOnlyNoMirror);
+            DesktopMask_AND &= ~(1 << (int)VisibilityLayer.HmdOnlyAndReflected);
         }
 
         #endregion

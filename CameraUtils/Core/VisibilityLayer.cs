@@ -52,11 +52,11 @@ namespace CameraUtils.Core {
         Environment = 14,
         GrabPassTexture1 = 15,
         CutEffectParticles = 16,
-        HmdOnlyNoMirror = 17, //<----------- Not used in Vanilla
-        DesktopOnlyNoMirror = 18, //<----------- Not used in Vanilla
+        HmdOnlyAndReflected = 17, //<----------- Not used in Vanilla
+        DesktopOnlyAndReflected = 18, //<----------- Not used in Vanilla
         NonReflectedParticles = 19,
         EnvironmentPhysics = 20,
-        AlwaysVisibleNoMirror = 21, //<----------- Not used in Vanilla
+        AlwaysVisibleAndReflected = 21, //<----------- Not used in Vanilla
         Event = 22,
         DesktopOnly = 23, //<----------- Not used in Vanilla
         HmdOnly = 24, //<----------- Not used in Vanilla
