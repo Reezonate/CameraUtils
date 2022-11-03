@@ -58,10 +58,10 @@ namespace CameraUtils.Core {
         EnvironmentPhysics = 20,
         AlwaysVisibleNoMirror = 21, //<----------- Not used in Vanilla
         Event = 22,
-        AlwaysVisible = 23, //<----------- Not used in Vanilla
+        DesktopOnly = 23, //<----------- Not used in Vanilla
         HmdOnly = 24, //<----------- Not used in Vanilla
         FixMRAlpha = 25,
-        DesktopOnly = 26, //<----------- Not used in Vanilla
+        AlwaysVisible = 26, //<----------- Not used in Vanilla
         DontShowInExternalMRCamera = 27,
         PlayersPlace = 28,
         Skybox = 29,
