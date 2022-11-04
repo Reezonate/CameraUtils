@@ -6,13 +6,14 @@ namespace CameraUtils.Behaviours {
     public class AutoCameraRegistrator : MonoBehaviour {
         #region CameraFlags
 
-        private CameraFlags _additionalFlags = CameraFlags.None;
+        [SerializeField]
+        private CameraFlags additionalFlags = CameraFlags.None;
 
         public CameraFlags AdditionalFlags {
-            get => _additionalFlags;
+            get => additionalFlags;
             set {
-                if (_additionalFlags == value) return;
-                _additionalFlags = value;
+                if (additionalFlags == value) return;
+                additionalFlags = value;
                 Register();
             }
         }
