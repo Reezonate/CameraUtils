@@ -67,28 +67,28 @@ namespace CameraUtils.Core {
         private static void AddEffectToAllCameras(ICameraEffect rb) {
             foreach (var rc in GetRegisteredCameras()) {
                 if (!rb.IsSuitableForCamera(rc)) continue;
-                rb.OnAddedToCamera(rc);
+                rb.HandleAddedToCamera(rc);
             }
         }
 
         private static void RemoveEffectFromAllCameras(ICameraEffect rb) {
             foreach (var rc in GetRegisteredCameras()) {
                 if (!rb.IsSuitableForCamera(rc)) continue;
-                rb.OnRemovedFromCamera(rc);
+                rb.HandleRemovedFromCamera(rc);
             }
         }
 
         private static void AddAllEffectsToCamera(RegisteredCamera rc) {
             foreach (var rb in GetAllCameraEffects()) {
                 if (!rb.IsSuitableForCamera(rc)) continue;
-                rb.OnAddedToCamera(rc);
+                rb.HandleAddedToCamera(rc);
             }
         }
 
         private static void RemoveAllEffectsFromCamera(RegisteredCamera rc) {
             foreach (var rb in GetAllCameraEffects()) {
                 if (!rb.IsSuitableForCamera(rc)) continue;
-                rb.OnRemovedFromCamera(rc);
+                rb.HandleRemovedFromCamera(rc);
             }
         }
 
