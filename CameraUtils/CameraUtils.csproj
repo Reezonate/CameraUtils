@@ -77,7 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviours\AutoCameraRegistrator.cs" />
-    <Compile Include="Behaviours\ScoreSaberReplayCameraRegistrator.cs" />
+    <Compile Include="Behaviours\ReplayCameraRegistrator.cs" />
     <Compile Include="Core\CameraFlags.cs" />
     <Compile Include="Core\CullingMaskUtils.cs" />
     <Compile Include="Core\ICameraEffect.cs" />

@@ -3,7 +3,7 @@ using CameraUtils.Core;
 using UnityEngine;
 
 namespace CameraUtils.Behaviours {
-    internal class ScoreSaberReplayCameraRegistrator : MonoBehaviour {
+    internal class ReplayCameraRegistrator : MonoBehaviour {
         private void Start() {
             StartCoroutine(RegisterCoroutine());
         }
@@ -12,7 +12,7 @@ namespace CameraUtils.Behaviours {
             yield return new WaitForEndOfFrame();
 
             foreach (var camera in FindObjectsOfType<Camera>()) {
-                if (!IsScoreSaberReplayCamera(camera)) continue;
+                if (!IsScoreSaberReplayCamera(camera) && !IsBeatLeaderReplayCamera(camera)) continue;
                 var cameraRegistrator = camera.gameObject.AddComponent<AutoCameraRegistrator>();
                 cameraRegistrator.AdditionalFlags |= CameraFlags.FirstPerson;
                 cameraRegistrator.AdditionalFlags |= CameraFlags.Composition;
@@ -23,6 +23,10 @@ namespace CameraUtils.Behaviours {
 
         private static bool IsScoreSaberReplayCamera(Camera camera) {
             return camera.name.Contains("RecorderCamera");
+        }
+
+        private static bool IsBeatLeaderReplayCamera(Camera camera) {
+            return camera.name.Equals("ReplayerViewCamera");
         }
     }
 }

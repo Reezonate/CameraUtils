@@ -26,7 +26,7 @@ namespace CameraUtils.HarmonyPatches {
                 }
 
                 if (sceneName == "GameCore") {
-                    new GameObject("ScoreSaberReplayCameraRegistrator").AddComponent<ScoreSaberReplayCameraRegistrator>();
+                    new GameObject("ReplayCameraRegistrator").AddComponent<ReplayCameraRegistrator>();
                 }
             }
         }
