@@ -2,6 +2,7 @@ using CameraUtils.Core;
 using UnityEngine;
 
 namespace CameraUtils.Behaviours {
+    [DisallowMultipleComponent]
     public class AutoCameraRegistrator : MonoBehaviour {
         #region CameraFlags
 
