@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using ModestTree;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace CameraUtils.Core {
     public static class CamerasManager {
@@ -38,65 +37,58 @@ namespace CameraUtils.Core {
             UnRegisterCamera(camera);
             var rc = new RegisteredCamera(camera, cameraFlags);
             Cameras[camera] = rc;
-            AddAllBuffersToCamera(rc);
+            AddAllEffectsToCamera(rc);
         }
 
         public static void UnRegisterCamera(Camera camera) {
             if (!Cameras.ContainsKey(camera)) return;
             var rc = Cameras.GetValueAndRemove(camera);
-            RemoveAllBuffersFromCamera(rc);
+            RemoveAllEffectsFromCamera(rc);
         }
 
         #endregion
 
-        #region CommandBuffers
+        #region CameraEffects
 
-        private static readonly Dictionary<CommandBuffer, RegisteredCommandBuffer> CommandBuffers = new();
-        public static IEnumerable<RegisteredCommandBuffer> GetRegisteredCommandBuffers() => CommandBuffers.Values;
+        private static readonly HashSet<ICameraEffect> CameraEffects = new();
+        public static IEnumerable<ICameraEffect> GetAllCameraEffects() => CameraEffects;
 
-        public static void RegisterCommandBuffer(
-            CameraEvent cameraEvent,
-            CommandBuffer commandBuffer,
-            CameraFlags includeFlags,
-            CameraFlags excludeFlags
-        ) {
-            UnRegisterCommandBuffer(commandBuffer);
-            var rb = new RegisteredCommandBuffer(cameraEvent, commandBuffer, includeFlags, excludeFlags);
-            CommandBuffers[commandBuffer] = rb;
-            AddBufferToAllCameras(rb);
+        public static void RegisterCameraEffect(ICameraEffect cameraEffect) {
+            UnRegisterCameraEffect(cameraEffect);
+            CameraEffects.Add(cameraEffect);
+            AddEffectToAllCameras(cameraEffect);
         }
 
-        public static void UnRegisterCommandBuffer(CommandBuffer commandBuffer) {
-            if (!CommandBuffers.ContainsKey(commandBuffer)) return;
-            var rb = CommandBuffers.GetValueAndRemove(commandBuffer);
-            RemoveBufferFromAllCameras(rb);
+        public static void UnRegisterCameraEffect(ICameraEffect cameraEffect) {
+            if (!CameraEffects.Remove(cameraEffect)) return;
+            RemoveEffectFromAllCameras(cameraEffect);
         }
 
-        private static void AddBufferToAllCameras(RegisteredCommandBuffer rb) {
+        private static void AddEffectToAllCameras(ICameraEffect rb) {
             foreach (var rc in GetRegisteredCameras()) {
-                if (!rb.IsSuitableForCamera(rc.CameraFlags)) continue;
-                rc.Camera.AddCommandBuffer(rb.CameraEvent, rb.CommandBuffer);
+                if (!rb.IsSuitableForCamera(rc)) continue;
+                rb.OnAddedToCamera(rc);
             }
         }
 
-        private static void RemoveBufferFromAllCameras(RegisteredCommandBuffer rb) {
+        private static void RemoveEffectFromAllCameras(ICameraEffect rb) {
             foreach (var rc in GetRegisteredCameras()) {
-                if (!rb.IsSuitableForCamera(rc.CameraFlags)) continue;
-                rc.Camera.RemoveCommandBuffer(rb.CameraEvent, rb.CommandBuffer);
+                if (!rb.IsSuitableForCamera(rc)) continue;
+                rb.OnRemovedFromCamera(rc);
             }
         }
 
-        private static void AddAllBuffersToCamera(RegisteredCamera rc) {
-            foreach (var rb in GetRegisteredCommandBuffers()) {
-                if (!rb.IsSuitableForCamera(rc.CameraFlags)) continue;
-                rc.Camera.AddCommandBuffer(rb.CameraEvent, rb.CommandBuffer);
+        private static void AddAllEffectsToCamera(RegisteredCamera rc) {
+            foreach (var rb in GetAllCameraEffects()) {
+                if (!rb.IsSuitableForCamera(rc)) continue;
+                rb.OnAddedToCamera(rc);
             }
         }
 
-        private static void RemoveAllBuffersFromCamera(RegisteredCamera rc) {
-            foreach (var rb in GetRegisteredCommandBuffers()) {
-                if (!rb.IsSuitableForCamera(rc.CameraFlags)) continue;
-                rc.Camera.RemoveCommandBuffer(rb.CameraEvent, rb.CommandBuffer);
+        private static void RemoveAllEffectsFromCamera(RegisteredCamera rc) {
+            foreach (var rb in GetAllCameraEffects()) {
+                if (!rb.IsSuitableForCamera(rc)) continue;
+                rb.OnRemovedFromCamera(rc);
             }
         }
 

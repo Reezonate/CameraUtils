@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CameraUtils.Behaviours;
+using CameraUtils.Core;
 using HarmonyLib;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -32,7 +33,11 @@ namespace CameraUtils.HarmonyPatches {
 
         private static void AddAutoCameraRegistrator(Camera camera) {
             if (camera.gameObject.GetComponent<AutoCameraRegistrator>() != null) return;
-            camera.gameObject.AddComponent<AutoCameraRegistrator>();
+            var cameraRegistrator = camera.gameObject.AddComponent<AutoCameraRegistrator>();
+            cameraRegistrator.AdditionalFlags |= CameraFlags.FirstPerson;
+            if (camera.name == "SmoothCamera") {
+                cameraRegistrator.AdditionalFlags |= CameraFlags.Composition;
+            }
         }
     }
 }

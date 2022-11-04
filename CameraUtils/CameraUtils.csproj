@@ -80,8 +80,8 @@
     <Compile Include="Behaviours\ScoreSaberReplayCameraRegistrator.cs" />
     <Compile Include="Core\CameraFlags.cs" />
     <Compile Include="Core\CullingMaskUtils.cs" />
+    <Compile Include="Core\ICameraEffect.cs" />
     <Compile Include="Core\RegisteredCamera.cs" />
-    <Compile Include="Core\RegisteredCommandBuffer.cs" />
     <Compile Include="Core\VisibilityLayer.cs" />
     <Compile Include="Core\CamerasManager.cs" />
     <Compile Include="Core\VisibilityUtils.cs" />
