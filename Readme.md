@@ -1,5 +1,5 @@
 # CameraUtils
-Beat Saber modding library that standardizes use of GameObject layers and provides tools for easier render pipeline modifications
+Beat Saber modding library that standardizes the use of GameObject layers and provides tools for easier rendering pipeline modifications
 
 ## Usage examples
 Check out [CameraUtilsSandbox project](https://github.com/Reezonate/CameraUtilsSandbox) for more code/usage examples
