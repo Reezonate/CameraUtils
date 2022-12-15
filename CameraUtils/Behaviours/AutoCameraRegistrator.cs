@@ -24,15 +24,9 @@ namespace CameraUtils.Behaviours {
 
         private Camera _camera;
         private bool _isEnabled;
-        private bool _isStarted;
 
         private void Awake() {
             _camera = GetComponent<Camera>();
-        }
-
-        private void Start() {
-            _isStarted = true;
-            Register();
         }
 
         private void OnEnable() {
@@ -45,18 +39,12 @@ namespace CameraUtils.Behaviours {
             UnRegister();
         }
 
-        private void OnDestroy() {
-            _isEnabled = false;
-            _isStarted = false;
-            UnRegister();
-        }
-
         #endregion
 
         #region Register / UnRegister
 
         private void Register() {
-            if (!_isStarted || !_isEnabled) return;
+            if (!_isEnabled) return;
 
             if (_camera.stereoEnabled) {
                 CamerasManager.RegisterHMDCamera(_camera, AdditionalFlags);
@@ -66,7 +54,6 @@ namespace CameraUtils.Behaviours {
         }
 
         private void UnRegister() {
-            if (!_isStarted) return;
             CamerasManager.UnRegisterCamera(_camera);
         }
 
