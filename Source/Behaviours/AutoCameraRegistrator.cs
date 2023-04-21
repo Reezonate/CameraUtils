@@ -14,7 +14,7 @@ namespace CameraUtils.Behaviours {
             set {
                 if (additionalFlags == value) return;
                 additionalFlags = value;
-                Register();
+                _flagsDirty = true;
             }
         }
 
@@ -23,20 +23,25 @@ namespace CameraUtils.Behaviours {
         #region Events
 
         private Camera _camera;
-        private bool _isEnabled;
+
+        private bool _flagsDirty = true;
+        private int _lastCullingMask;
+
+        private bool IsDirty => _flagsDirty || _camera.cullingMask != _lastCullingMask;
 
         private void Awake() {
             _camera = GetComponent<Camera>();
         }
 
-        private void OnEnable() {
-            _isEnabled = true;
-            Register();
+        private void OnDisable() {
+            UnRegister();
         }
 
-        private void OnDisable() {
-            _isEnabled = false;
-            UnRegister();
+        private void OnPreCull() {
+            if (!IsDirty) return;
+            Register();
+            _lastCullingMask = _camera.cullingMask;
+            _flagsDirty = false;
         }
 
         #endregion
@@ -44,8 +49,6 @@ namespace CameraUtils.Behaviours {
         #region Register / UnRegister
 
         private void Register() {
-            if (!_isEnabled) return;
-
             if (_camera.stereoEnabled) {
                 CamerasManager.RegisterHMDCamera(_camera, AdditionalFlags);
             } else {
