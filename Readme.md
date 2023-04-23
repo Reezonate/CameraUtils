@@ -38,4 +38,4 @@ private void InitCamera(Camera camera) {
 - To insert custom logic into the render pipeline, use `CamerasManager.RegisterCameraEffect()`
 - Make sure to remove your effects on dispose, using `CamerasManager.UnRegisterCameraEffect()`
 
-See: [simple Post-Process effect example](https://github.com/Reezonate/CameraUtilsSandbox/blob/master/CameraUtilsSandbox%20Plugin/CameraUtilsSandbox/Core/PostProcessDemo.cs)
+See: [simple Post-Process effect example](https://github.com/Reezonate/CameraUtilsSandbox/blob/master/CameraUtilsSandbox%20Plugin/Source/Core/PostProcessDemo.cs)
