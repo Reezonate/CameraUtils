@@ -2,9 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/bsmg/BSIPA-MetadataFileSchema/master/Schema.json",
   "id": "CameraUtils",
   "name": "CameraUtils",
-  "author": "",
+  "author": "Reezonate",
   "version": "1.0.2",
-  "description": "",
+  "description": "Library that standardizes the use of GameObject layers and provides tools for easier rendering pipeline modifications",
   "gameVersion": "1.29.1",
   "dependsOn": {
     "BSIPA": "^4.0.5"
