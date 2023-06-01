@@ -35,6 +35,7 @@ namespace CameraUtils.Behaviours {
 
         private void OnDisable() {
             UnRegister();
+            _flagsDirty = true;
         }
 
         private void OnPreCull() {
